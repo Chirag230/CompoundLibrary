@@ -1,0 +1,39 @@
+<div class="compound-detail-container">
+  <button class="back-button" (click)="goBack()">← Back to List</button>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+  
+  <div class="compound-detail-card" *ngIf="compound && !error">
+    <div class="compound-image-container">
+            <div 
+        class="compound-image" 
+        [ngStyle]="{
+          'background-image': 'url(' + compound.strImageSource + ')',
+          'background-size': 'contain',
+          'background-position': 'center',
+          'background-repeat': 'no-repeat'
+        }"
+      >
+      </div>
+      <div class="image-attribution" *ngIf="compound.srcImageAttribution">
+        Image source: {{ compound.srcImageAttribution }}
+      </div>
+    </div>
+
+    <div class="compound-info">
+      <h1>{{ compound.name }}</h1>
+      <p class="description" *ngIf="compound.description">{{ compound.description }}</p>
+      <p class="description" *ngIf="!compound.description">No description available.</p>
+      
+      <div class="metadata">
+        <p class="date" *ngIf="compound.dateModified">Last modified: {{ compound.dateModified | date:'medium' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="loading-container" *ngIf="!compound && !error">
+  <p>Loading compound details...</p>
+</div>

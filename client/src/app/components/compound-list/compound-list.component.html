@@ -1,0 +1,64 @@
+<div class="compounds-container">
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div class="compounds-grid" *ngIf="!error">
+    <div *ngFor="let compound of compounds" class="compound-card">
+       <div class="card__background" style="background-image: url(https://images.unsplash.com/photo-1557004396-66e4174d7bf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60)"></div>
+      <!-- Clickable Area for Detail View -->
+      <div class="compound-click-area" (click)="viewCompound(compound.id)">
+      <div 
+        class="compound-image" 
+        [ngStyle]="{
+          'background-image': 'url(' + compound.strImageSource + ')',
+          'background-size': 'contain',
+          'background-position': 'center',
+          'background-repeat': 'no-repeat'
+        }"
+      >
+      </div>
+        <div class="compound-content">
+          <h2>{{ compound.name }}</h2>
+          <p>{{ compound.description }}</p>
+          <div class="compound-footer">
+            <small *ngIf="compound.dateModified">
+              Modified: {{ fromNow(compound.dateModified) }}
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons (Non-Navigating) -->
+      <div class="compound-actions">
+        <button (click)="editCompound(compound.id); $event.stopPropagation()">Edit</button>
+        <button class="delete-btn" (click)="deleteCompound(compound.id); $event.stopPropagation()">Delete</button>
+      </div>
+    </div>
+
+
+    <!-- <div class="create-button">
+      <button (click)="createCompound()">Add New Compound</button>
+    </div> -->
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination" *ngIf="!error && totalItems > pageSize">
+    <button 
+      [disabled]="currentPage === 1" 
+      (click)="onPageChange(currentPage - 1)">
+      Previous
+    </button>
+    <span>Page {{ currentPage }}</span>
+    <button 
+      [disabled]="currentPage * pageSize >= totalItems" 
+      (click)="onPageChange(currentPage + 1)">
+      Next
+    </button>
+  </div>
+
+  <!-- No Results Message -->
+  <div *ngIf="!error && compounds.length === 0" class="no-compounds">
+    No compounds found.
+  </div>
+</div>

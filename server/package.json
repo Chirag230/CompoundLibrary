@@ -1,0 +1,39 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "seed": "node seed.js",
+  "start": "node index.js",
+  "generate": "drizzle-kit generate",
+  "migrate": "drizzle-kit push"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "better-sqlite3": "^11.10.0",
+    "cors": "^2.8.5",
+    "csv-parse": "^5.5.3",
+    "drizzle-orm": "^0.43.1",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.1"
+  },
+  "drizzle-kit": {
+    "schema": "./db/schema.js",
+    "out": "./drizzle",
+    "driver": "better-sqlite",
+    "dbCredentials": {
+      "url": "./db.sqlite"
+    }
+  }
+}

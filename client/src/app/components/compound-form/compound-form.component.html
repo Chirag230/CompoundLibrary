@@ -1,0 +1,32 @@
+<div class="compound-form-container">
+  <h2>{{ isEditMode ? 'Edit' : 'Create' }} Compound</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Name:</label>
+      <input formControlName="name" required />
+    </div>
+
+    <div>
+      <label>Description:</label>
+      <textarea formControlName="description"></textarea>
+    </div>
+
+    <div>
+      <label>Image URL:</label>
+      <input formControlName="strImageSource" />
+    </div>
+
+    <div>
+      <label>{{isEditMode ? 'Date Modified:' :'Date Created:'}}</label>
+      <input formControlName="dateModified" type="datetime-local" />
+    </div>
+
+    <div class="button-group">
+    <button type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+    <button type="button" (click)="router.navigate(['/compounds'])">Cancel</button>
+</div>
+  </form>
+
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+</div>
